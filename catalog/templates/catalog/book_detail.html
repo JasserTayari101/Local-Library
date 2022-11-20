@@ -7,24 +7,22 @@
         <li><span class="attribute">Author</span> {{book.author}} </li>
         <li><span class="attribute">Summary</span> {{book.summary}} </li>
         <li><span class="attribute">ISBN</span> {{book.isbn}} </li>
-        <li><span class="attribute">Language</span> {{book.languages}} </li>
-        <li><span class="attribute">Genres</span> {{book.genres}} </li>
+        <li><span class="attribute">Language</span> {{book.languages.all|join:', '}} </li>
+        <li><span class="attribute">Genres</span> {{book.genres.all|join:', '}} </li>
     </ul>
     <section class="copies">
         {% with copies.count as total %}
             <h2>{{total}} Copie{{total|pluralize}}</h2>
         {% endwith %}
-        <div class="book_copies">
+            <ul class="book_copies">
             {% for copie in copies %}
-                <ul class="book_copie">
-                    <li>
-                        <h4 class="{{copie.status}}"> {{copie.status}} </h4>
-                        <p>Id:{{copie.unique_id}}</p>
-                    </li>
-                </ul>
+                <li class="copie">
+                    <h4 class="{{copie.status}}"> {{copie.get_status_display}} </h4>
+                    <p>Id:{{copie.unique_id}}</p>
+                </li>
             {% empty %}
                 <p>No Copies for this book.</p>    
             {% endfor %}
-        </div>
+            </ul>
     </section> 
 {% endblock content %}

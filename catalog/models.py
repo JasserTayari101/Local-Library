@@ -66,8 +66,17 @@ class BookInstance(models.Model):
     
     def __str__(self):
         return f'{self.unique_id} ({self.book.title})'
-    
 
+    def get_status_display(self):
+        if self.status == 'a':
+            return 'Available'
+        elif self.status == 'o':
+            return 'On Loan'
+        elif self.status == 'r':
+            return 'Reserved'
+        elif self.status == 'm':
+            return 'Maintenance'
+        
 class Author(models.Model):
     """Model representing an author"""
 

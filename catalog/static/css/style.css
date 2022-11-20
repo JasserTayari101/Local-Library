@@ -5,7 +5,9 @@
 }
 
 body {
-  background-image: linear-gradient(to right, rgb(65, 160, 41), rgb(25, 88, 62));
+  background-image: url("../assets/bg.jpg");
+  background-position: cover;
+  background-repeat: no-repeat;
 }
 
 .main_container {
@@ -62,4 +64,18 @@ body {
 }
 .main_container .content a:visited {
   color: blue;
+}
+.main_container .content .copie {
+  border-top: 1px solid grey;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.main_container .content h4.a {
+  color: green;
+}
+.main_container .content h4.o, .main_container .content h4.m, .main_container .content h4.r {
+  color: red;
+}
+.main_container .content .summary {
+  font-size: small;
 }/*# sourceMappingURL=style.css.map */

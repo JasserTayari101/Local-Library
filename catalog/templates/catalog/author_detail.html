@@ -17,7 +17,7 @@
             {% for book in books %}
                 <ul class="book">
                     <li><a href="{{book.get_absolute_url}}">{{book.title}}</a>({{book.id}})</li>
-                    <p>{{book.preview|linebreaks}}</p>
+                    <p class="summary">{{book.summury}}</p>
                 </ul>
             {% empty %}
                 <p>No Books for this Author.</p>    

@@ -5,7 +5,10 @@
 }
 
 body{
-    background-image: linear-gradient(to right,rgb(65, 160, 41),rgb(25, 88, 62));
+    //background-image: linear-gradient(to right,rgb(65, 160, 41),rgb(25, 88, 62));
+    background-image: url('../assets/bg.jpg');
+    background-position: cover;
+    background-repeat: no-repeat;
 }
 
 .main_container{
@@ -61,6 +64,22 @@ body{
             &:visited{
                 color: blue;
             }
+        }
+        .copie{
+            border-top: 1px solid grey;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        h4{
+            &.a{
+                color: green;
+            }
+            &.o,&.m,&.r{
+                color: red;
+            }
+        }
+        .summary{
+            font-size: small;
         }
     }
 }
