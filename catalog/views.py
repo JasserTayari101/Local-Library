@@ -4,9 +4,9 @@ from .models import Book,BookInstance,Author
 
 def index(request):
     counts = [
-        {'name':'Books','count':len(Book.objects.all() )},
-        {'name':'Copies','count':len(BookInstance.objects.all() ) },
-        {'name':'Copies Available','count':len(BookInstance.objects.filter(status='a')) },
-        {'name':'Authors','count':len(Author.objects.all())},
+        {'name':'Books','count':(Book.objects.all()).count()},
+        {'name':'Copies','count':(BookInstance.objects.all().count() ) },
+        {'name':'Copies Available','count':(BookInstance.objects.filter(status='a')).count() },
+        {'name':'Authors','count':(Author.objects.all()).count()},
     ]
     return render(request,'catalog/index.html',{'counts':counts})
