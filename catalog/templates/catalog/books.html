@@ -1,0 +1,14 @@
+{% extends 'catalog/base.html' %}
+
+
+{% block content %}
+    <main>
+        <h1>Book List</h1>
+        <ul class="counts">
+            {% for book in books %}
+                <li><a href=" {{book.get_absolute_url}} ">{{book.title}}</a>( {{book.author.name}} )</li>
+            {% endfor %}
+        </ul>
+    </main>
+
+{% endblock content %}

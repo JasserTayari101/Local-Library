@@ -5,7 +5,7 @@
 }
 
 body {
-  background-image: linear-gradient(to right, rgb(65, 160, 41), rgb(11, 165, 101));
+  background-image: linear-gradient(to right, rgb(65, 160, 41), rgb(25, 88, 62));
 }
 
 .main_container {
@@ -30,6 +30,9 @@ body {
 .main_container .sidebar ul li a:hover {
   text-decoration: underline;
 }
+.main_container .sidebar ul li a:visited {
+  color: blue;
+}
 .main_container .content {
   display: flex;
   flex-direction: column;
@@ -44,4 +47,19 @@ body {
 .main_container .content .counts .count_number {
   font-weight: bold;
   color: rgb(18, 104, 161);
+}
+.main_container .content .attribute {
+  color: rgb(67, 37, 70);
+}
+.main_container .content .attribute::after {
+  content: ": ";
+}
+.main_container .content a {
+  text-decoration: none;
+}
+.main_container .content a:hover {
+  text-decoration: underline;
+}
+.main_container .content a:visited {
+  color: blue;
 }/*# sourceMappingURL=style.css.map */

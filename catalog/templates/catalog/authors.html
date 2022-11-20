@@ -1,0 +1,15 @@
+{% extends 'catalog/base.html' %}
+
+
+{% block content %}
+    <main>
+        <h1>Authors List</h1>
+        <ul class="counts">
+            {% for author in authors %}
+                <li><a href=" {{author.get_absolute_url}} ">{{author.name}}( {{author.date_of_birth}} )</a></li>
+            {% endfor %}
+        </ul>
+    </main>
+
+{% endblock content %}
+

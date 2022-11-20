@@ -12,7 +12,13 @@
 </head>
 <body>
     <div class="main_container">
-        <div class="sidebar">{% block sidebar %}{% endblock sidebar %}</div>
+        <div class="sidebar">
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'list_books' %}">All books</a></li>
+                <li><a href="{% url 'list_authors' %}">All authors</a></li>
+            </ul>
+        </div>
         <div class="content">{% block content %}{% endblock content %}</div>
     </div>
 </body>

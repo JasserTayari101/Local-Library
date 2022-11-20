@@ -1,0 +1,27 @@
+{% extends 'catalog/base.html' %}
+
+
+{% block content %}
+    <h1><span class="attribute">Author</span>{{book.title}}</h1>
+    <ul class="author_details">
+        <li><span class="attribute">Date of Birth</span> {{author.date_of_birth}} </li>
+        {% if author.date_of_death %}
+            <li><span class="attribute">Date of Death</span> {{author.date_of_death}} </li>
+        {% endif %}
+    </ul>
+    <section class="copies">
+        {% with books.count as total %}
+            <h2>{{total}} Book{{total|pluralize}}</h2>
+        {% endwith %}
+        <div class="books">
+            {% for book in books %}
+                <ul class="book">
+                    <li><a href="{{book.get_absolute_url}}">{{book.title}}</a>({{book.id}})</li>
+                    <p>{{book.preview|linebreaks}}</p>
+                </ul>
+            {% empty %}
+                <p>No Books for this Author.</p>    
+            {% endfor %}
+        </div>
+    </section> 
+{% endblock content %}

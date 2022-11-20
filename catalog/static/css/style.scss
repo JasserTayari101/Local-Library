@@ -5,7 +5,7 @@
 }
 
 body{
-    background-image: linear-gradient(to right,rgb(65, 160, 41),rgb(11, 165, 101));
+    background-image: linear-gradient(to right,rgb(65, 160, 41),rgb(25, 88, 62));
 }
 
 .main_container{
@@ -25,6 +25,9 @@ body{
                     &:hover{
                         text-decoration: underline;
                     }
+                    &:visited{
+                        color: blue;
+                    }
                 }
             }
         }
@@ -42,6 +45,21 @@ body{
             .count_number{
                 font-weight: bold;
                 color: rgb(18, 104, 161);
+            }
+        }
+        .attribute{
+            color: rgb(67, 37, 70);
+            &::after{
+                content:': ';
+            }
+        }
+        a{
+            text-decoration: none;
+            &:hover{
+                text-decoration: underline;
+            }
+            &:visited{
+                color: blue;
             }
         }
     }
