@@ -1,0 +1,33 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block sidebar %}
+<ul>
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <!--<a href="books.html">All books</a>
+    <a href="authors.html">All authors</a> -->
+</ul>
+{% endblock  %}
+
+
+{% block content %}
+
+    <header>
+        <h1>Local Library Home</h1>
+        <p>Welcome to LocalLibrary, a very basic Django website.</p>
+    </header>
+    <main>
+        <h2>Dynamic Content</h2>
+        <section>
+            <p>The library has the following record counts:</p>
+
+            <ul class="counts">
+                {% for object in counts %}
+                    <li>{{object.name}}: <span class="count_number">{{object.count}}</span></li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+
+{% endblock content %}

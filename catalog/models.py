@@ -11,16 +11,26 @@ class Genre(models.Model):
     
     def __str__(self):
         return self.name
+
+class Language(models.Model):
+    """Model representing a language""" 
+
+    name = models.CharField(max_length=30,help_text="Enter a book language")
     
+    def __str__(self):
+        return self.name
+
+
+
 class Book(models.Model):
-    """Model representing a book(but not a specific copyp"""
+    """Model representing a book(but not a specific copy)"""
     
     title = models.CharField(max_length=200)
     author = models.ForeignKey('Author',on_delete=models.SET_NULL,null=True,related_name='author')
     summury = models.TextField(max_length=1000,help_text="Enter a brief description of the book")
     isbn = models.CharField(max_length=13,unique=True)
-    genre = models.ManyToManyField(Genre,help_text="Select genres for this book")
-    
+    genres = models.ManyToManyField(Genre,help_text="Select genres for this book")
+    languages = models.ManyToManyField(Language,help_text="Select languages for this book")
     
     def __str__(self):
         return f'{self.title} written by {self.author.name}'
@@ -29,7 +39,12 @@ class Book(models.Model):
         return reverse("book-detail",args=[
             str(self.id)
         ])
-        
+    
+    def display_genre(self):
+        """Create a list of genres of a book"""
+        return list(self.genres.all())
+    display_genre.short_description = 'Genre'   #a description for display_genre function
+
 class BookInstance(models.Model):
     """Model representing a unique instance of a book"""
 
@@ -44,8 +59,8 @@ class BookInstance(models.Model):
     due_back = models.DateField(null=True,blank=True)
     status = models.CharField(choices=LOAN_STATUS,max_length=1,default='a',blank=True,help_text="Book Availability")
     book = models.ForeignKey(Book,on_delete=models.RESTRICT,null=True,related_name="book")
-    imprint = models.CharField(max_length=200)
-   
+    imprint = models.CharField(max_length=200,null=True,blank=True)
+    
     class Meta:
         ordering = ('due_back','status') 
     
@@ -68,4 +83,4 @@ class Author(models.Model):
     
     def __str__(self):
         return self.name
-    
+

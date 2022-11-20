@@ -1,0 +1,48 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: linear-gradient(to right,rgb(65, 160, 41),rgb(11, 165, 101));
+}
+
+.main_container{
+    display: flex;
+    font-size: 1.2rem;
+    .sidebar{
+        flex-basis: 20%;
+        ul{
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            margin-top: 10%;
+            li{
+                margin-left: 10px;
+                a{
+                    text-decoration: none;
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+    .content{
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+
+        .counts{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            list-style-position: inside;
+            .count_number{
+                font-weight: bold;
+                color: rgb(18, 104, 161);
+            }
+        }
+    }
+}
