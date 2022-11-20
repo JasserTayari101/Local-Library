@@ -10,7 +10,12 @@ def index(request):
         {'name':'Copies Available','count':(BookInstance.objects.filter(status='a')).count() },
         {'name':'Authors','count':(Author.objects.all()).count()},
     ]
-    return render(request,'catalog/index.html',{'counts':counts})
+
+    visited = request.session.get('visited',False)
+    if not visited:
+        request.session['visited'] = True
+
+    return render(request,'catalog/index.html',{'counts':counts,'visited':visited})
 
 
 def list_books(request):

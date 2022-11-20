@@ -3,22 +3,34 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-
-    <header>
-        <h1>Local Library Home</h1>
-        <p>Welcome to LocalLibrary, a very basic Django website.</p>
+<header>
+    <h1>Local Library Home</h1>
+    <p>Welcome to LocalLibrary, a very basic Django website.</p>
+    {% if num_vists %}
+    <small>You have visted our website {{num_vists}} time {{num_vists|pluralize}} before.</small>
+    {% endif %}
     </header>
     <main>
         <h2>Dynamic Content</h2>
         <section>
             <p>The library has the following record counts:</p>
-
+            
             <ul class="counts">
                 {% for object in counts %}
-                    <li>{{object.name}}: <span class="count_number">{{object.count}}</span></li>
+                <li>{{object.name}}: <span class="count_number">{{object.count}}</span></li>
                 {% endfor %}
             </ul>
         </section>
     </main>
-
-{% endblock content %}
+    {% if visited %}
+    <small id="visited"></small>
+    {% endif %}
+    <script defer>
+        const visited = document.getElementById('visited');
+        if(visited===null)
+            alert("This website uses cookies!");
+    </script>
+    
+    {% endblock content %}
+    
+    
