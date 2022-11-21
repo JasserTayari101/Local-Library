@@ -126,3 +126,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'        # upon logging in the user will be rediected the root directoy(default /accounts/profile)
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    #send emails to the console

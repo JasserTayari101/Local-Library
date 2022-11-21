@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Book,BookInstance,Author
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
-
+from django.contrib.auth.decorators import login_required #wrap around views that require login
 
 def index(request):
     counts = [
@@ -64,3 +64,10 @@ def author_detail(request,author_id):
         books = Book.objects.filter(author_id=author_id)  
     
     return render(request,f'catalog/author_detail.html',{'author':author,'books':books})
+
+
+@login_required
+def user_books(request):
+    loaned_books = BookInstance.objects.filter(borrower=request.user).filter(status='o').order_by('-due_back')
+
+    return render(request,'catalog/user_books.html',{'loaned_books':loaned_books})

@@ -1,0 +1,11 @@
+{% extends 'catalog/base.html' %}
+
+
+{% block content %}
+    <h1>Borrowed Books:</h1>
+    <ul class="borrowed_books">
+        {% for copie in loaned_books %}
+            <li><a href="{% url 'book-detail' copie.book.id %}">{{copie.book.title}}({{copie.due_back}})</a></li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

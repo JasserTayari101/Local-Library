@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 import uuid
+from django.contrib.auth.models import User
+from datetime import date
 
 
 class Genre(models.Model):
@@ -61,8 +63,16 @@ class BookInstance(models.Model):
     book = models.ForeignKey(Book,on_delete=models.RESTRICT,null=True,related_name="book")
     imprint = models.CharField(max_length=200,null=True,blank=True)
     
+    borrower = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,blank=True)
+    
     class Meta:
         ordering = ('due_back','status') 
+        
+    
+    @property
+    def is_overdue(self):
+        """Determine if the book is overdue based on current time and due_back"""
+        return bool(self.due_back and date.today()>self.due_back)   #it is overdue if the due_back is defined and today passed the due_back date
     
     def __str__(self):
         return f'{self.unique_id} ({self.book.title})'

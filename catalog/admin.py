@@ -16,7 +16,7 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_display = ('unique_id','book','status','due_back')
+    list_display = ('unique_id','book','status','due_back','borrower')
     list_filter = ('status','book','due_back')
     search_fields = ('imprint',)
     raw_id_fields = ('book',)
