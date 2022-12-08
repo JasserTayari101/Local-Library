@@ -19,6 +19,9 @@
                 <li class="copie">
                     <h4 class="{{copie.status}}"> {{copie.get_status_display}} </h4>
                     <p>Id:{{copie.unique_id}}</p>
+                    {% if request.user.is_authenticated and copie.status == 'a' %}
+                        <a href={% url 'borrow-book' copie.unique_id %} >Borrow</a>
+                    {% endif %}
                 </li>
             {% empty %}
                 <p>No Copies for this book.</p>    

@@ -8,4 +8,5 @@ urlpatterns = [
     path('authors',views.list_authors,name='list_authors'),
     path('author/<int:author_id>',views.author_detail,name='author-detail'),
     path('my_books',views.user_books,name='user_books'),
+    path('borrow/<uuid:unique_id>',views.borrow_book,name='borrow-book'),
 ]

@@ -2,6 +2,8 @@ from django.shortcuts import render,get_object_or_404
 from .models import Book,BookInstance,Author
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.contrib.auth.decorators import login_required #wrap around views that require login
+from django.http import HttpResponseRedirect
+from django.shortcuts import reverse
 
 def index(request):
     counts = [
@@ -20,18 +22,6 @@ def index(request):
 
 def list_books(request):
     all_books = Book.objects.all()
-    #
-    #paginator = Paginator(all_books,4)
-    #
-    #page = request.GET.get('page')
-   #
-    #try:
-    #    books = paginator(page)
-    #except PageNotAnInteger:
-    #    books = paginator(1)
-    #except EmptyPage:
-    #    books = paginator(paginator.num_pages)
-    #
     return render(request,'catalog/books.html',{'books':all_books})
 
 def book_detail(request,book_id):
@@ -43,18 +33,7 @@ def book_detail(request,book_id):
 
 def list_authors(request):
     all_authors = Author.objects.all()
-    
-    #paginator = Paginator(all_authors,4)
    
-    #page = request.GET.get('page')
-   
-    #try:
-    #    authors = paginator(page)
-    #except PageNotAnInteger:
-    #    authors = paginator(1)
-    #except EmptyPage:
-    #    authors = paginator(paginator.num_pages)
-    
     return render(request,'catalog/authors.html',{'authors':all_authors})
 
 def author_detail(request,author_id):
@@ -71,3 +50,13 @@ def user_books(request):
     loaned_books = BookInstance.objects.filter(borrower=request.user).filter(status='o').order_by('-due_back')
 
     return render(request,'catalog/user_books.html',{'loaned_books':loaned_books})
+
+    
+@login_required
+def borrow_book(request,unique_id):
+    copie = get_object_or_404(BookInstance,unique_id=unique_id)
+    if copie.status == 'a': #if the copie is available for borrowing
+        copie.borrower = request.user
+        copie.status = 'o'
+        copie.save()
+    return HttpResponseRedirect(reverse('list_books'))
