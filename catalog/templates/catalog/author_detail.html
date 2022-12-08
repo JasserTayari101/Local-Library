@@ -16,7 +16,7 @@
         <div class="books">
             {% for book in books %}
                 <ul class="book">
-                    <li><a href="{{book.get_absolute_url}}">{{book.title}}</a>({{book.id}})</li>
+                    <li><a href="{{book.get_absolute_url}}">{{book.title}}</a>(id:{{book.id}})</li>
                     <p class="summary">{{book.summury}}</p>
                 </ul>
             {% empty %}
