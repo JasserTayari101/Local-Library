@@ -1,0 +1,20 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+
+    {% if borrowed %}
+        <p>
+            Successfuly borrowed the copie of id:{{copie.unique_id}}.
+            Pleaseb brings it at {{copie.due_back}}!
+        </p>
+    {% else %}
+    
+        <form method='POST'>
+            {% csrf_token %}
+            {{borrow_form.as_p}}
+            <input type='submit' value='Borrow'>
+        </form>
+
+    {% endif %}
+
+{% endblock content %}

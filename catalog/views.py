@@ -2,8 +2,10 @@ from django.shortcuts import render,get_object_or_404
 from .models import Book,BookInstance,Author
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.contrib.auth.decorators import login_required #wrap around views that require login
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import reverse
+from .forms import BorrowForm
+
 
 def index(request):
     counts = [
@@ -55,8 +57,24 @@ def user_books(request):
 @login_required
 def borrow_book(request,unique_id):
     copie = get_object_or_404(BookInstance,unique_id=unique_id)
-    if copie.status == 'a': #if the copie is available for borrowing
-        copie.borrower = request.user
-        copie.status = 'o'
-        copie.save()
-    return HttpResponseRedirect(reverse('list_books'))
+    
+    if copie.status == 'a':
+        borrowed = None
+        if request.method == 'POST':
+            borrow_form = BorrowForm(request.POST)
+            if borrow_form.is_valid():
+                cd = borrow_form.cleaned_data
+                copie.due_back = cd['due_back']
+                copie.borrower = request.user
+                copie.status = 'o'
+                copie.save()
+                borrowed = True
+            else:
+                borrow_form = BorrowForm()
+        else:
+            borrow_form = BorrowForm()
+
+        return render(request,'catalog/borrow_book.html',{'borrow_form':borrow_form,'borrowed':borrowed,'copie':copie})
+        
+    else:
+        return HttpResponse(f"This copie is not available! Can't borrow it! return at {copie.due_back}")
