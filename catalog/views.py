@@ -78,3 +78,17 @@ def borrow_book(request,unique_id):
         
     else:
         return HttpResponse(f"This copie is not available! Can't borrow it! return at {copie.due_back}")
+    
+    
+
+@login_required
+def return_book(request,unique_id):
+    copie = get_object_or_404(BookInstance,unique_id=unique_id)
+    
+    if copie.status == 'o' and copie.borrower == request.user:
+        copie.status = 'a'
+        copie.borrower = None
+        copie.due_back = None
+        copie.save()
+        
+        return HttpResponseRedirect(reverse('user_books'))

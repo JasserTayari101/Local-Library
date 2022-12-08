@@ -5,7 +5,12 @@
     <h1>Borrowed Books:</h1>
     <ul class="borrowed_books">
         {% for copie in loaned_books %}
-            <li><a href="{% url 'book-detail' copie.book.id %}">{{copie.book.title}}({{copie.due_back}})</a></li>
+            <li><a href="{% url 'book-detail' copie.book.id %}">
+                {{copie.book.title}}({{copie.due_back}})
+
+                <a href="{%url 'return-book' copie.unique_id %}" class="btn return">Return Back</a>
+
+            </a></li>
         {% endfor %}
     </ul>
 {% endblock content %}

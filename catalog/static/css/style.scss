@@ -81,5 +81,19 @@ body{
         .summary{
             font-size: small;
         }
+        .btn{
+            background-color: blue;
+            color: white;
+            border-radius: 15px;
+            padding: 5px;
+            border: none;
+            &:hover{
+                text-decoration: none;
+                font-size: smaller;
+            }
+        }
+        .return{
+            background-color: red;
+        }
     }
 }

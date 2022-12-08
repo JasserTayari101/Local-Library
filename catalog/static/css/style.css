@@ -78,4 +78,18 @@ body {
 }
 .main_container .content .summary {
   font-size: small;
+}
+.main_container .content .btn {
+  background-color: blue;
+  color: white;
+  border-radius: 15px;
+  padding: 5px;
+  border: none;
+}
+.main_container .content .btn:hover {
+  text-decoration: none;
+  font-size: smaller;
+}
+.main_container .content .return {
+  background-color: red;
 }/*# sourceMappingURL=style.css.map */
