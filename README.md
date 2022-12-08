@@ -1,5 +1,5 @@
 # Local-Library
-A local library for managing books and their copie,avalibility...with authentication.
+A local library written in Django for managing books and their copie,avalibility...with authentication.
 
 # Home Page
 
